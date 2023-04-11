@@ -14,10 +14,6 @@ inputs:
     description: 'Comma separated list of prefix should be ignored by action in title. eg: wip'
     required: false
     default: 'wip'
-  prefix_case_sensitive:
-    description: 'Are the allowed & ignored prefixes case sensitive?'
-    required: false
-    default: 'false'
   github_token:
     description: >
       Personal access token (PAT) used to fetch the repository. The PAT is configured
@@ -30,7 +26,7 @@ inputs:
 
 runs:
   using: 'node16'
-  main: 'dist/bundle.js'
+  main: 'dist/index.js'
 branding:
   icon: 'alert-triangle'
   color: 'gray-dark'

@@ -1,5 +1,5 @@
-import core from '@actions/core';
-import github from '@actions/github';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 
 export const validateTitlePrefix = (title: string, prefix: string): boolean => title.toLowerCase().startsWith(prefix.toLowerCase());
 
@@ -48,7 +48,7 @@ export const testPullRequestTitleRegex = (pullRequestTitle: string) => {
 export const isIgnoredPrefix = (pullRequestTitle: string): boolean => {
 	const ignoredPrefixesList = core.getInput('ignored_prefixes');
 	core.info(`Ignored Prefixes: ${ignoredPrefixesList}`);
-	if (ignoredPrefixesList.length) {
+	if (!ignoredPrefixesList.length) {
 		return false;
 	}
 

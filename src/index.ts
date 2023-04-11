@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import * as core from '@actions/core';
 import {getPullRequestTitle, isAllowedPrefix, isIgnoredPrefix, testPullRequestTitleRegex, validateEvent} from './utils';
 
 const run = async () => {
@@ -6,11 +6,12 @@ const run = async () => {
 		validateEvent();
 		const pullRequestTitle = await getPullRequestTitle();
 		core.info(`Pull Request title: "${pullRequestTitle}"`);
-		testPullRequestTitleRegex(pullRequestTitle);
 
 		if (isIgnoredPrefix(pullRequestTitle)) {
 			return;
 		}
+
+		testPullRequestTitleRegex(pullRequestTitle);
 
 		if (!isAllowedPrefix(pullRequestTitle)) {
 			throw new Error(`Pull Request title "${pullRequestTitle}" did not match any of the prefixes`);

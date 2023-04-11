@@ -1,31 +1,23 @@
 name: 'Pull Request title rules'
 description: 'Github action to enforce Pull Request title conventions'
-author: 'deepakputhraya'
+author: 'Ygor Galeno(forked from deepakputhraya)'
 inputs:
   regex:
     description: 'Regex to validate the pull request title'
     required: false
     default: '.+'
   allowed_prefixes:
-    description: 'Comma separated list of prefix allowed to be used in title. eg: feature,hotfix,JIRA-'
+    description: 'Comma separated list of prefix allowed to be used in title. eg: feat, fix'
     required: false
     default: ''
-  disallowed_prefixes:
-    description: 'Comma separated list of prefix disallowed to be used in title. eg: feat,fix'
+  ignored_prefixes:
+    description: 'Comma separated list of prefix should be ignored by action in title. eg: wip'
     required: false
-    default: ''
+    default: 'wip'
   prefix_case_sensitive:
-    description: 'Are the allowed & disallowed prefixes case sensitive?'
+    description: 'Are the allowed & ignored prefixes case sensitive?'
     required: false
     default: 'false'
-  min_length:
-    description: 'Min length of title'
-    required: false
-    default: '1'
-  max_length:
-    description: 'Max length of title. -1 to ignore the rule'
-    required: false
-    default: '-1'
   github_token:
     description: >
       Personal access token (PAT) used to fetch the repository. The PAT is configured
@@ -37,8 +29,8 @@ inputs:
     default: ${{ github.token }}
 
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: 'node16'
+  main: 'dist/bundle.js'
 branding:
   icon: 'alert-triangle'
   color: 'gray-dark'
